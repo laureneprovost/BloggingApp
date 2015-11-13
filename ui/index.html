@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="Mahantesh Kumbar" content="">
+    <title>Blog</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <div ng-include="'includes/header.tpl.html'" ></div>
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('img/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Happy to Blog</h1>
+                        <hr class="small">
+                        <span class="subheading">Have a fun</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <ui-view></ui-view>
+            </div>
+        </div>
+    </div>
+
+   <div ng-include="'includes/footer.tpl.html'"></div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- angularjs -->
+    <script src="js/angular.js"></script>
+     <!--Login service js-->
+    <script src="services/login-service.js"></script>
+    <!--mainjs-->
+    <script src="app.js"></script>
+    <!--State Provider-->
+    <script src="js/angular-ui-router.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+
+    <script type="text/javascript">
+    (function() {
+      var initInjector = angular.injector(['ng']);
+      var $http = initInjector.get('$http');
+      $http.get("meta/config.txt").then(function (response) {
+        /*make full API url*/
+        //console.log(response);
+        angular.forEach(response.data.api,function(value,key){
+         response.api = response.data;
+        });
+
+        //console.log(response.api);
+        angular.module("config", []).constant("CONFIG", response.api);
+        //console.log(response.api);
+        }
+      );
+     })();
+    </script>
+</body>
+
+</html>
