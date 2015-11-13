@@ -1,5 +1,5 @@
 {
 	"api":{
-	"hi":"http://localhost/BloggingApp/api/addBlogs"
+	"hi":"http://localhost/BloggingApp/api/getBlogs"
 	}
 }

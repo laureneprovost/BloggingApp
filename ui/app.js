@@ -1,9 +1,6 @@
-'use strict';
-angular.module('myApp', ['ui.router','loginService'])
+angular.module('myApp', ['ui.router','loginService','ui.bootstrap'])
 	.config(function($stateProvider,$urlRouterProvider){
-
 		$urlRouterProvider.otherwise("/");
-
 		$stateProvider
 	    .state("homeState", {
 	      "url": "/",
@@ -27,35 +24,34 @@ angular.module('myApp', ['ui.router','loginService'])
 	    });
 
 	})
-
 	.controller('homeCtrl',function($scope,$http){
-		  $http.get("http://localhost/BloggingApp/api/getBlogs").then(function (response) {
+		 $http.get("http://localhost/BloggingApp/api/getBlogs").then(function (response) {
 		 	$scope.blogs = response.data;
-		 	console.log(response.data);
 		 });
-
 	})
-
+	
 	.controller('registerCtrl',function($scope,$http){
 		$scope.doRegister=function(){
-		console.log($scope.reg);
-		$http({
-	        method: 'POST',
-	        url: "http://localhost/BloggingApp/api/registerUser",
-	        data: $scope.reg,
-	        headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-	     }).then(function (response){
-	     	console.log(response);
-	     })
+			$http({
+		        method: 'POST',
+		        url: "http://localhost/BloggingApp/api/registerUser",
+		        data: $scope.reg,
+		        headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+		     }).then(function (response){
+		     })
 	 	}
 
 	})
 	.controller('loginCtrl',function($scope,$http,GlobalData){
-		 var ddd = GlobalData.getLoginInfo();
-			ddd.then(function(data){
-			$scope.dd = data;
-		})
+		$scope.doLogin = function(){
+			console.log($scope.logs);
+			var promise = GlobalData.getLoginInfo($scope.logs);
+			promise.then(function(response){
+				$scope.ls = response.data;						
+			})
+		}
 	})
+
 
 /*app.controller('customersCtrl', function($scope, $http) {
 	 $scope.doRegister=function(){

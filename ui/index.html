@@ -49,19 +49,23 @@
     <script src="js/jquery.js"></script>
     <!-- angularjs -->
     <script src="js/angular.js"></script>
-     <!--Login service js-->
-    <script src="services/login-service.js"></script>
+     <!--Login service js-->       
     <!--mainjs-->
     <script src="app.js"></script>
+    <script src="js/ui-bootstrap-tpls-0.14.3.js"></script>    
+    <script src="services/login-service.js"></script>
+    <!--Angular Validater
+    <script src="js/angular-validator.min.js"></script>        
+    <script src="js/angular-validator.js"></script>-->        
     <!--State Provider-->
-    <script src="js/angular-ui-router.js"></script>
+    <script src="js/angular-ui-router.js"></script>    
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/clean-blog.min.js"></script>
+    
 
     <script type="text/javascript">
-    (function() {
       var initInjector = angular.injector(['ng']);
       var $http = initInjector.get('$http');
       $http.get("meta/config.txt").then(function (response) {
@@ -72,11 +76,9 @@
         });
 
         //console.log(response.api);
-        angular.module("config", []).constant("CONFIG", response.api);
+        angular.module('myAppconfig', []).constant("CONFIG", response.api);
         //console.log(response.api);
-        }
-      );
-     })();
+        });     
     </script>
 </body>
 

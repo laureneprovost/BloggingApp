@@ -1,13 +1,17 @@
 angular.module('loginService', [])
-
-.service("GlobalData",function($http,$q) {
+.service("GlobalData",function($http,$q,$state) {
 	var self ={};
 	var d = $q.defer();
-	self.getLoginInfo = function (){
-	 $http.get("http://localhost/BloggingApp/api/getBlogs").then(function (response) {
-		var dd = response.data;
-		d.resolve(dd);
-	})
+	self.getLoginInfo = function (creds){
+	$http({
+        method: 'POST',
+        url: "http://localhost/BloggingApp/api/loginUser",
+        data: creds,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+     }).then(function (response){
+     	var loginInfo = response;
+		d.resolve(loginInfo);
+     })	
 	 return d.promise;
 	}
 	return self;
