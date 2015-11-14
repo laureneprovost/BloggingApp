@@ -29,7 +29,7 @@ angular.module('myApp', ['ui.router','loginService','ui.bootstrap'])
 		 	$scope.blogs = response.data;
 		 });
 	})
-	
+
 	.controller('registerCtrl',function($scope,$http){
 		$scope.doRegister=function(){
 			$http({
@@ -42,14 +42,15 @@ angular.module('myApp', ['ui.router','loginService','ui.bootstrap'])
 	 	}
 
 	})
-	.controller('loginCtrl',function($scope,$http,GlobalData){
-		$scope.doLogin = function(){
-			console.log($scope.logs);
-			var promise = GlobalData.getLoginInfo($scope.logs);
+	.controller('loginCtrl',function($scope,$http,GlobalData,$state){
+		$scope.doLogin = function(){			
+			var promise = GlobalData.getLogin($scope.logs);
 			promise.then(function(response){
-				$scope.ls = response.data;						
+				$scope.ls = response.data;
+				console.log($scope.ls);				
 			})
 		}
+		console.log($scope.ls);
 	})
 
 
