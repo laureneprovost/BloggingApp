@@ -23,7 +23,8 @@ function sayHello() {
 /*Authontion related Functions*/
 function loginUsers(){
 	$obj = getRequestObjects();
-	$sql = "SELECT * FROM registeruser WHERE email='$obj->email' AND password='$obj->password'";
+	$password = md5($obj->password);//encrypting password by md5() 
+	$sql = "SELECT * FROM registeruser WHERE email='$obj->email' AND password='$password'";
 	fetchAll($sql);
 }
 
@@ -36,10 +37,11 @@ function registerUsers(){
 
 function insertRequestObject2($sql,$obj) {
 	$db = getConnection();
+	$password = md5($obj->password);//encrypting password by md5()
 	$stmt = $db->prepare($sql);
 	$stmt->bindParam(":name", $obj->name);
 	$stmt->bindParam(":email", $obj->email);
-	$stmt->bindParam(":password", $obj->password);
+	$stmt->bindParam(":password", $password);
 	$stmt->execute();
 }
 
@@ -50,7 +52,18 @@ function getAllBlogs(){
 }
 
 function addBlogs(){
-	echo "get coffee";
+	$obj = getRequestObjects();
+	$sql = "INSERT INTO blogs (blogheading,description,registeruserid) VALUES (:blogheading,:description,:registeruserid)";
+	insertRequestObject1($sql,$obj);
+}
+
+function insertRequestObject1($sql,$obj) {
+	$db = getConnection();	
+	$stmt = $db->prepare($sql);
+	$stmt->bindParam(":blogheading", $obj->blogheading);
+	$stmt->bindParam(":description", $obj->description);
+	$stmt->bindParam(":registeruserid", $obj->registeruserid);
+	$stmt->execute();
 }
 
 /*Main Applicatiopn Functions*/

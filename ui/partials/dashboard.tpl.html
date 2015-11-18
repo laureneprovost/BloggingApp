@@ -1,88 +1,65 @@
-{{ls}}
-   <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">   
-               <p>Enter your email id to get the User Id helps to post ur data</p>                     
-                <form name="sentMessage" id="BlogForm1" novalidate>              
-                    <div class="row control-group">
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label></label>
-                            <input type="email" class="form-control" placeholder="Blog Heading" id="name" ng-model="blogr.email" required data-validation-required-message="Please enter your email.">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>                                       
-                    <br>
-                    <div class="row">
-                        <div class="form-group col-xs-12">
-                            <button ng-click="doGetUserId()" name="submit" value="" class="btn btn-success">Post</button>
-                        </div>
-                    </div>                  
-                </form>
-
-                <h2>User Id {{userid}}</h2>
+<!-- Blog Content -->
+<div class="container">
+    <div class="row">
+        {{loginInfo}}
+        {{ls}} 
+        {{UserName}}
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <p>Your Posts</p>
+            <hr>
+            <div ng-repeat="blog in blogs">
+                <div class="post-preview">
+                    <a href="post.html">
+                        <h2 class="post-title">
+                            {{blog.blogheading}}
+                        </h2>
+                        <h3 class="post-subtitle">
+                            {{blog.description}}
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted By <a href="#">{{blog.name}}</a> on {{blog.cdate}}</p>
+                </div>
             </div>
+            <hr>
         </div>
     </div>
-  
-    <!-- Blog Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <p>Your Posts</p>
-                <hr>
-                <div ng-repeat="blog in blogs">
-                    <div class="post-preview">                    
-                        <a href="post.html">
-                            <h2 class="post-title">
-                                {{blog.blogheading}}
-                            </h2>
-                            <h3 class="post-subtitle">
-                                {{blog.description}}
-                            </h3>
-                        </a>
-                        <p class="post-meta">Posted By <a href="#">{{blog.name}}</a> on {{blog.cdate}}</p>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+           <p>Submit New Posts</p>
+            <form name="blogForm" class="form-horizontal" ng-submit="doBlogAdd()" novalidate>
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Heading</label>
+                        <input type="text" class="form-control" placeholder="Blog Heading" name="blogheading" ng-model="blog.blogheading" required>
+                        <p class="help-block text-danger">
+                            <div ng-show="blogForm.$submitted || blogForm.blogheading.$touched">
+                            <span  style="color:red;" ng-show="blogForm.blogheading.$error.required">Required</span>
+                            </div>
+                        </p>
                     </div>
-                </div>                
-            </div>
+                </div>
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Description</label>
+                        <textarea type="text" class="form-control" placeholder="Description" name="description" ng-model="blog.description" required></textarea>
+                        <p class="help-block text-danger">
+                            <div ng-show="blogForm.$submitted || blogForm.description.$touched">
+                            <span  style="color:red;" ng-show="blogForm.description.$error.required">Required</span>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <button type="submit" name="submit" ng-disabled="blogForm.$invalid" class="btn btn-success">Post</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-
-    <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">   
-               <p>Submit New Posts</p>  
-               <p>{{message}}</p>                     
-                <form name="sentMessage" id="BlogForm" novalidate>                   
-                    <div class="row control-group">
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>Heading</label>
-                            <input type="name" class="form-control" placeholder="Blog Heading" id="name" ng-model="blog.blogheading" required data-validation-required-message="Please enter blog heading.">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <div class="row control-group">
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>Description</label>
-                            <input type="text" class="form-control" placeholder="Description" id="desc" ng-model="blog.description" required data-validation-required-message="Please enter description.">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-
-                    <div class="row control-group">
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>User Id</label>
-                            <input type="number" class="form-control" placeholder="Please enter userid mentioned above" id="desc" ng-model="blog.registeruserid" required data-validation-required-message="Please enter userid.">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>                                     
-                    <br>
-                    <div class="row">
-                        <div class="form-group col-xs-12">
-                            <button ng-click="doPostRegister()" name="submit" value="" class="btn btn-success">Post</button>
-                        </div>
-                    </div>                  
-                </form>
-            </div>
-        </div>
-    </div>
+</div>
