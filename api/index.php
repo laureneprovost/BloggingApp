@@ -9,6 +9,7 @@ $app->get('/hello', 'sayHello');
 //APIs for Blog
 $app->get('/getBlogs', '\getAllBlogs');
 $app->post('/addBlogs', '\addBlogs');
+$app->get('/getLoginUserBlogs/:id', '\getLoginUserBlogs');
 
 //APIs for Authontication
 $app->post('/registerUser', '\registerUsers');
@@ -64,6 +65,10 @@ function insertRequestObject1($sql,$obj) {
 	$stmt->bindParam(":description", $obj->description);
 	$stmt->bindParam(":registeruserid", $obj->registeruserid);
 	$stmt->execute();
+}
+
+function getLoginUserBlogs($id) {
+	fetchAll("SELECT * FROM blogs WHERE  registeruserid=$id");
 }
 
 /*Main Applicatiopn Functions*/

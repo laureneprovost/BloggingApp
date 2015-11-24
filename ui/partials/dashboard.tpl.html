@@ -1,10 +1,16 @@
 <!-- Blog Content -->
 <div class="container">
-    <div class="row">
-        {{loginInfo}}
-        {{ls}} 
-        {{UserName}}
+    <div class="row">{{ls}}         
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <nav style="margin-top:10%;"class="navbar navbar-default" role="navigation">
+                <div class="navbar-header"> 
+                    <a class="navbar-brand" href="#">Welcome {{UserName}}</a> 
+                </div> 
+                <div class="navbar-form" style="margin-left:80%;" role="search">                                   
+                    <a class="btn btn-danger" ui-sref="homeState">Logout</a>                 
+                </div> 
+            </nav>      
+        
             <p>Your Posts</p>
             <hr>
             <div ng-repeat="blog in blogs">
@@ -29,7 +35,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-           <p>Submit New Posts</p>
+           <h2>Submit New Posts</h2>
             <form name="blogForm" class="form-horizontal" ng-submit="doBlogAdd()" novalidate>
                 <div class="row control-group">
                     <div class="form-group col-xs-12 floating-label-form-group controls">

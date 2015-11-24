@@ -10,11 +10,10 @@ angular.module('loginService', [])
         headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
      }).then(function (response){
      	if(response.data!=null && response.data!=""){
-     		var loginInfo = response;
-			d.resolve(loginInfo);
-			$state.go('loginState.dashboardState');
+     		var loginInfo = response;      		    		
+			d.resolve(loginInfo);	
+			$state.go('loginState.dashboardState');		
 		}else{
-			var loginInfo = 'Enter Valid Information'
 			d.resolve(loginInfo);
 		}
      })

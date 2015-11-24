@@ -7,7 +7,7 @@
 </div>
     <!-- Main Content -->
     <div class="container" ng-hide="UserName">
-        <div class="row">
+        <div class="row" ng-hide="hides==true">
             <h3 style="color:red;">{{Errmessage}}</h3>
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <form name="loginForm" ng-submit="doLogin()" class="form-horizontal" novalidate>
